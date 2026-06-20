@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "211d352ba940164b63b2",
   "position": {
-    "x": 758.21656050955414,
-    "y": 3.4940855323020927,
+    "x": 770.4,
+    "y": 16,
     "z": 3000,
-    "height": 107.15195632393085,
-    "width": 179.36305732484075,
+    "height": 92,
+    "width": 236.8,
     "tabOrder": 3000
   },
   "visual": {
@@ -66,6 +66,42 @@
           },
           "selector": {
             "metadata": "_Measures.Warrant Count"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'ACTIVE WARRANTS'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'left'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
           }
         }
       ]

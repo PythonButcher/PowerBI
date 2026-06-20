@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "00ea173d9bd09998812e",
   "position": {
-    "x": 684.37956204379566,
-    "y": 130.80291970802921,
+    "x": 649,
+    "y": 132,
     "z": 6000,
-    "height": 249.92700729927009,
-    "width": 578.10218978102193,
+    "height": 238,
+    "width": 607,
     "tabOrder": 6000
   },
   "visual": {
@@ -124,28 +124,28 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Disposition Rate by Case Type'"
+                  "Value": "'DISPOSITION RATE BY CASE TYPE'"
                 }
               }
             },
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Calibri'"
+                  "Value": "'Segoe UI Semibold'"
                 }
               }
             },
             "alignment": {
               "expr": {
                 "Literal": {
-                  "Value": "'center'"
+                  "Value": "'left'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "13D"
+                  "Value": "14D"
                 }
               }
             }

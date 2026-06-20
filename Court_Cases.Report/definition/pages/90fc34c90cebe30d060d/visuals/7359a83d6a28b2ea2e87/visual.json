@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "7359a83d6a28b2ea2e87",
   "position": {
-    "x": 24.525547445255476,
-    "y": 122.62773722627738,
+    "x": 24,
+    "y": 132,
     "z": 5000,
-    "height": 237.08029197080293,
-    "width": 649.34306569343073,
+    "height": 238,
+    "width": 607,
     "tabOrder": 5000
   },
   "visual": {
@@ -126,28 +126,28 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Case Volume Trend by Filing Month'"
+                  "Value": "'CASE VOLUME TREND'"
                 }
               }
             },
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'Calibri'"
+                  "Value": "'Segoe UI Semibold'"
                 }
               }
             },
             "alignment": {
               "expr": {
                 "Literal": {
-                  "Value": "'center'"
+                  "Value": "'left'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "13D"
+                  "Value": "14D"
                 }
               }
             }

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "56ace6c2eb06aab7a9e0",
   "position": {
-    "x": 221.29208371246585,
-    "y": 0,
+    "x": 24,
+    "y": 16,
     "z": 0,
-    "height": 109.4813466787989,
-    "width": 161.8926296633303,
+    "height": 92,
+    "width": 236.8,
     "tabOrder": 0
   },
   "visual": {
@@ -85,6 +85,42 @@
           },
           "selector": {
             "metadata": "_Measures.Case Count"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'ACTIVE CASES'"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'left'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
           }
         }
       ]

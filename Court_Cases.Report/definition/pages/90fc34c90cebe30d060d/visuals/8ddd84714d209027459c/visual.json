@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "8ddd84714d209027459c",
   "position": {
-    "x": 24.525547445255476,
-    "y": 380.7299270072993,
+    "x": 24,
+    "y": 394,
     "z": 7000,
-    "height": 312.99270072992704,
-    "width": 649.34306569343073,
+    "height": 302,
+    "width": 607,
     "tabOrder": 7000
   },
   "visual": {
@@ -207,28 +207,28 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Active Pending Age by Case Type'"
+                  "Value": "'ACTIVE PENDING AGE BY COURT LEVEL'"
                 }
               }
             },
             "fontFamily": {
               "expr": {
                 "Literal": {
-                  "Value": "'''Arial Unicode MS'''"
+                  "Value": "'Segoe UI Semibold'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "13D"
+                  "Value": "14D"
                 }
               }
             },
             "alignment": {
               "expr": {
                 "Literal": {
-                  "Value": "'center'"
+                  "Value": "'left'"
                 }
               }
             }
