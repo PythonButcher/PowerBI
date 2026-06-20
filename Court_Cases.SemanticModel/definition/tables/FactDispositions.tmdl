@@ -1,0 +1,59 @@
+table FactDispositions
+	lineageTag: d2a0b535-1310-4d03-baf5-83bab666634f
+
+	column disposition_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2485af8d-1e73-42d6-bf9e-76961c08b6c7
+		summarizeBy: none
+		sourceColumn: disposition_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column charge_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 45661db4-bfbb-4ad3-8d49-84a44a94accd
+		summarizeBy: none
+		sourceColumn: charge_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column disposition_result
+		dataType: string
+		lineageTag: 272a8cc9-d922-43c9-b77f-d422ccd31476
+		summarizeBy: none
+		sourceColumn: disposition_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column disposition_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 57aab9e5-2a5a-463a-ac9a-0ab909dd1c3a
+		summarizeBy: none
+		sourceColumn: disposition_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition FactDispositions = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_dispositions = Source{[Schema="public",Item="dispositions"]}[Data]
+				in
+				    public_dispositions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

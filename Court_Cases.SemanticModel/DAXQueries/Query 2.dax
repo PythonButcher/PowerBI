@@ -1,0 +1,4 @@
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "Active Warrant Count", [Active Warrant Count]
+    )

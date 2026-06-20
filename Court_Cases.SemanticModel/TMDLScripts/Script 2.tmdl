@@ -1,0 +1,10 @@
+createOrReplace
+
+	ref table _Measures
+
+		measure 'Case Count' =
+				
+				DISTINCTCOUNT ( FactCases[case_id] )
+			formatString: 0
+			lineageTag: a163fde0-7d7f-4ea5-beca-33b6cdc05a1d
+

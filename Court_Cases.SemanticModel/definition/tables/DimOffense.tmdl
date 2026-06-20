@@ -1,0 +1,52 @@
+table DimOffense
+	lineageTag: 47140097-aabd-4971-94e6-7f62d1ff76eb
+
+	column offense_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c1d9d1b7-2beb-4bce-8440-89f57cd4c2b4
+		summarizeBy: none
+		sourceColumn: offense_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column statute_code
+		dataType: string
+		lineageTag: 46f2db63-a5a2-4015-ac9f-d3665de28cae
+		summarizeBy: none
+		sourceColumn: statute_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column offense_name
+		dataType: string
+		lineageTag: ece2a50f-14fd-4710-b259-8da173005187
+		summarizeBy: none
+		sourceColumn: offense_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity_level
+		dataType: string
+		lineageTag: 583f587d-026b-4db5-866b-c0e58e3c3ecc
+		summarizeBy: none
+		sourceColumn: severity_level
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimOffense = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_offenses = Source{[Schema="public",Item="offenses"]}[Data]
+				in
+				    public_offenses
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

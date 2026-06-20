@@ -1,0 +1,75 @@
+table FactHearings
+	lineageTag: fdd06d74-66a1-4a8a-8605-602aa218b803
+
+	column hearing_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e52e892c-8c06-48e3-be0d-277a8cf6c013
+		summarizeBy: sum
+		sourceColumn: hearing_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4eab10c7-203a-40a3-a7de-37ddd165bc7e
+		summarizeBy: none
+		sourceColumn: case_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hearing_type
+		dataType: string
+		lineageTag: 7ba41e8e-a352-4e38-a7b5-d5c3f28b12af
+		summarizeBy: none
+		sourceColumn: hearing_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column hearing_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: af2c56c2-65d2-4b2d-9d9b-21f283983e7c
+		summarizeBy: none
+		sourceColumn: hearing_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column courtroom
+		dataType: string
+		lineageTag: a654dc3b-5054-482c-9916-221005cf6aff
+		summarizeBy: none
+		sourceColumn: courtroom
+
+		annotation SummarizationSetBy = Automatic
+
+	column result_summary
+		dataType: string
+		lineageTag: 6cf6b477-4ff7-4898-a477-b5aabb841651
+		summarizeBy: none
+		sourceColumn: result_summary
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactHearings = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_hearings = Source{[Schema="public",Item="hearings"]}[Data]
+				in
+				    public_hearings
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

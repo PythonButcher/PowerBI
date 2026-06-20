@@ -1,0 +1,60 @@
+table BridgeCaseParty
+	lineageTag: a705a698-8977-4d6b-a78b-94d6ed21de11
+
+	column case_party_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 671a997a-a113-466f-b86a-e10ee985fbca
+		summarizeBy: sum
+		sourceColumn: case_party_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bb44eea4-975f-462c-8de8-1eb7d15a496c
+		summarizeBy: none
+		sourceColumn: case_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4f8f0c28-b573-429f-981d-329112789132
+		summarizeBy: none
+		sourceColumn: person_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column party_role
+		dataType: string
+		lineageTag: 804d5d39-03df-44f9-8a7e-8562bf5220ea
+		summarizeBy: none
+		sourceColumn: party_role
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BridgeCaseParty = m
+		mode: import
+		source =
+				let
+				  Source = PostgreSQL.Database("localhost", "court_cms"),
+				  #"Navigation 1" = Source{[Schema = "public", Item = "case_parties"]}[Data]
+				in
+				  #"Navigation 1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

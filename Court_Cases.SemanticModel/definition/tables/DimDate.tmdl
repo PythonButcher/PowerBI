@@ -1,0 +1,151 @@
+table DimDate
+	lineageTag: d003f0d6-fa66-478f-8ff1-5e2170d73620
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: Long Date
+		lineageTag: 3ed4378a-0456-45ac-91c0-09f187d51261
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		formatString: 0
+		lineageTag: 39f6157c-f033-46cc-9dd7-e856e5818231
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Number'
+		formatString: 0
+		lineageTag: 7787ffc7-d233-4029-be1c-1573874c1176
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 01c19bab-4fca-42e9-8258-fbbb9f018dbc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		formatString: 0
+		lineageTag: 47c7d2bc-e41b-428c-bc68-211f17e3c587
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		lineageTag: 28839c49-60a3-4d2c-bb6b-87cb133cad11
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		lineageTag: 26653f0f-5f99-4c82-b47e-0325e5f9429d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Month]
+		sortByColumn: 'Year Month Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Sort'
+		formatString: 0
+		lineageTag: 5c4f3c97-0d4c-40c2-b1dc-480c739bef98
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Month Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		formatString: 0
+		lineageTag: 961b87a2-513c-404b-a8fc-a404f31b939d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Number'
+		formatString: 0
+		lineageTag: bc711ad5-6c70-4879-9c2c-f709cf284f2c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day of Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		lineageTag: 00680560-6d36-4bcb-9fc2-5f85a69711ef
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day of Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = calculated
+		mode: import
+		source =
+				
+				VAR MinDate =
+				    MINX (
+				        UNION (
+				            SELECTCOLUMNS ( FactCases, "DateValue", FactCases[filing_date] ),
+				            SELECTCOLUMNS ( FactCharges, "DateValue", FactCharges[filed_date] ),
+				            SELECTCOLUMNS ( FactHearings, "DateValue", FactHearings[hearing_date] ),
+				            SELECTCOLUMNS ( FactPayments, "DateValue", FactPayments[payment_date] ),
+				            SELECTCOLUMNS ( FactWarrants, "DateValue", FactWarrants[issue_date] ),
+				            SELECTCOLUMNS ( FactPleas, "DateValue", FactPleas[plea_date] ),
+				            SELECTCOLUMNS ( FactDispositions, "DateValue", FactDispositions[disposition_date] )
+				        ),
+				        [DateValue]
+				    )
+				VAR MaxDate =
+				    MAXX (
+				        UNION (
+				            SELECTCOLUMNS ( FactCases, "DateValue", FactCases[filing_date] ),
+				            SELECTCOLUMNS ( FactCharges, "DateValue", FactCharges[filed_date] ),
+				            SELECTCOLUMNS ( FactHearings, "DateValue", FactHearings[hearing_date] ),
+				            SELECTCOLUMNS ( FactPayments, "DateValue", FactPayments[payment_date] ),
+				            SELECTCOLUMNS ( FactWarrants, "DateValue", FactWarrants[issue_date] ),
+				            SELECTCOLUMNS ( FactPleas, "DateValue", FactPleas[plea_date] ),
+				            SELECTCOLUMNS ( FactDispositions, "DateValue", FactDispositions[disposition_date] )
+				        ),
+				        [DateValue]
+				    )
+				RETURN
+				ADDCOLUMNS (
+				    CALENDAR ( MinDate, MaxDate ),
+				    "Year", YEAR ( [Date] ),
+				    "Quarter Number", QUARTER ( [Date] ),
+				    "Quarter", "Q" & QUARTER ( [Date] ),
+				    "Month Number", MONTH ( [Date] ),
+				    "Month Name", FORMAT ( [Date], "MMMM" ),
+				    "Year Month", FORMAT ( [Date], "YYYY-MM" ),
+				    "Year Month Sort", YEAR ( [Date] ) * 100 + MONTH ( [Date] ),
+				    "Day", DAY ( [Date] ),
+				    "Day of Week Number", WEEKDAY ( [Date], 2 ),
+				    "Day of Week", FORMAT ( [Date], "dddd" )
+				)
+
+	annotation PBI_Id = 44a7c0524f3e4bfab28fc00eeb76507a
+

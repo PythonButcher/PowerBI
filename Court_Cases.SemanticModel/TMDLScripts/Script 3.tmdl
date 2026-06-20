@@ -1,0 +1,13 @@
+createOrReplace
+
+	ref table _Measures
+
+		measure 'Charges Filed' =
+				
+				CALCULATE(
+				    [Charge Count],
+				    USERELATIONSHIP(DimDate[Date], FactCharges[filed_date])
+				)
+			formatString: 0
+			lineageTag: 490724e6-c24b-4a2e-afe6-4a9349f11d02
+

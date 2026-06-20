@@ -1,0 +1,150 @@
+table FactCases
+	lineageTag: 3a87d809-3719-40e4-8121-aabf5fa8ae0d
+
+	column case_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f3b2572e-c985-45ec-827e-535d04e4ba74
+		summarizeBy: none
+		sourceColumn: case_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_number
+		dataType: string
+		lineageTag: 566049cd-cee8-4110-82ce-a4e93fc4e689
+		summarizeBy: none
+		sourceColumn: case_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 33c9a3c2-65dc-48c7-b0d1-16daf2ab9953
+		summarizeBy: none
+		sourceColumn: case_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_status_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 847bd79e-aa18-49cb-800b-92f655df7418
+		summarizeBy: none
+		sourceColumn: case_status_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column filing_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e2b82e42-2b4b-4cfe-866d-18d35da71c0c
+		summarizeBy: none
+		sourceColumn: filing_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column court_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a375706f-28bc-49d6-8f5d-8ee0579c44a7
+		summarizeBy: none
+		sourceColumn: court_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column assigned_judge_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6a132f10-91ea-47ac-ac8c-ebdbb3086bfd
+		summarizeBy: none
+		sourceColumn: assigned_judge_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 26e7356f-5e46-47d5-afe8-c6b630da428f
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pending Age Bucket' =
+			
+			VAR AgeDays =
+			    DATEDIFF(
+			        FactCases[filing_date],
+			        TODAY(),
+			        DAY
+			    )
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    AgeDays <= 90, "0–90 days",
+			    AgeDays <= 180, "91–180 days",
+			    AgeDays <= 365, "181–365 days",
+			    "365+ days"
+			)
+		lineageTag: c597e491-0c0a-441f-8b77-cbb76e3108d4
+		summarizeBy: none
+		sortByColumn: 'Pending Age Bucket Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pending Age Bucket Sort' =
+			
+			VAR AgeDays =
+			    DATEDIFF(
+			        FactCases[filing_date],
+			        TODAY(),
+			        DAY
+			    )
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    AgeDays <= 90, 1,
+			    AgeDays <= 180, 2,
+			    AgeDays <= 365, 3,
+			    4
+			)
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0f44b9af-bd19-4f8c-9e65-69f086f6ce13
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactCases = m
+		mode: import
+		source =
+				let
+				  Source = PostgreSQL.Database("localhost", "court_cms"),
+				  #"Navigation 1" = Source{[Schema = "public", Item = "cases"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"Navigation 1",{{"case_id", Int64.Type}, {"case_number", type text}, {"filing_date", type date}})
+				in
+				  #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

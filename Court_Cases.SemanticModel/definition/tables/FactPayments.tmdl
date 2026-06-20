@@ -1,0 +1,69 @@
+table FactPayments
+	lineageTag: e89580ad-21b5-463a-8bc4-578fa1b774d1
+
+	column payment_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: dda8d746-51dc-4e7a-8831-5bbeca34e64f
+		summarizeBy: none
+		sourceColumn: payment_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f35245d9-940b-4636-840d-fe2c97361616
+		summarizeBy: none
+		sourceColumn: case_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 81c821dd-f679-480a-a0bb-c3d43b1ce0be
+		summarizeBy: none
+		sourceColumn: payment_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column amount
+		dataType: double
+		lineageTag: 526975cf-cf26-435a-bf69-62acb8aa3366
+		summarizeBy: none
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column payment_method
+		dataType: string
+		lineageTag: eccfc757-c6b3-4acc-bd8a-9867dcb25243
+		summarizeBy: none
+		sourceColumn: payment_method
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactPayments = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_payments = Source{[Schema="public",Item="payments"]}[Data]
+				in
+				    public_payments
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

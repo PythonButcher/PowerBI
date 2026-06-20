@@ -1,0 +1,13 @@
+createOrReplace
+
+	ref table _Measures
+
+		measure 'Active Warrant Count' =
+				
+				CALCULATE (
+				    [Warrant Count],
+				    FactWarrants[is_active] = TRUE ()
+				)
+			formatString: 0
+			lineageTag: 264b41b4-a479-4e45-ba53-0a80b4caf1fe
+

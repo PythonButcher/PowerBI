@@ -1,0 +1,40 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["BridgeCaseParty","DimCaseStatus","FactCases","DimCourts","DimPerson","DimCaseType","FactDispositions","FactHearings","DimJudge","DimOffense","FactPayments","DimPleaType","FactPleas","FactSentences","FactWarrants","DimAttorney","FactCharges"]
+
+annotation PBI_ProTooling = ["DevMode","DaxQueryView_Desktop","TMDLView_Desktop"]
+
+ref table BridgeCaseParty
+ref table DimCaseStatus
+ref table FactCases
+ref table DateTableTemplate_6aff270a-c44c-44fc-8f7b-cb449f80d36a
+ref table DimCourts
+ref table DimPerson
+ref table LocalDateTable_d03d0de3-a34c-460d-992f-8a8f85a5bfd7
+ref table LocalDateTable_493240bf-2b36-476e-9a0a-554892912b23
+ref table DimCaseType
+ref table FactDispositions
+ref table FactHearings
+ref table DimJudge
+ref table LocalDateTable_c936a56a-3db5-4a8b-9e35-64abfd056f58
+ref table DimOffense
+ref table FactPayments
+ref table DimPleaType
+ref table FactPleas
+ref table FactSentences
+ref table FactWarrants
+ref table DimAttorney
+ref table FactCharges
+ref table _Measures
+ref table DimDate
+
+ref cultureInfo en-US
+

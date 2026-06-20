@@ -1,0 +1,86 @@
+table DimJudge
+	lineageTag: 166a4a0b-5f11-4b0c-81ba-88ea7735b284
+
+	column judge_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 66302583-843e-4b03-b9ef-3b4854f252c8
+		summarizeBy: none
+		sourceColumn: judge_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		isHidden
+		lineageTag: 76da311c-5d92-4418-8033-2bd8b261124c
+		summarizeBy: none
+		sourceColumn: first_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		isHidden
+		lineageTag: 4d3097b1-d8a3-408b-809f-12340cbb87d4
+		summarizeBy: none
+		sourceColumn: last_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column appointment_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ba282bd3-192e-491d-85a2-cb5f4d0cc870
+		summarizeBy: none
+		sourceColumn: appointment_date
+
+		variation Variation
+			isDefault
+			relationship: 5a20454b-6ab1-4ec6-bcb8-3132faa2fc4b
+			defaultHierarchy: LocalDateTable_c936a56a-3db5-4a8b-9e35-64abfd056f58.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column court_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 11671fae-e959-4832-ba6a-ea6eae257d79
+		summarizeBy: sum
+		sourceColumn: court_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Judge Name' =
+			
+			DimJudge[first_name] & " " & DimJudge[last_name]
+		lineageTag: c8a308ae-9776-44c9-bc11-7c7bbd78306a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimJudge = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_judges = Source{[Schema="public",Item="judges"]}[Data]
+				in
+				    public_judges
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

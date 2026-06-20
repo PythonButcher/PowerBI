@@ -1,0 +1,44 @@
+table DimCaseType
+	lineageTag: 778f3d56-ab38-4741-8278-04f9807c2817
+
+	column case_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5a6ac95d-59b9-460c-8a44-7345f4b6454e
+		summarizeBy: none
+		sourceColumn: case_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_type_code
+		dataType: string
+		lineageTag: ba666c67-ac1f-4088-b385-67f7710fd200
+		summarizeBy: none
+		sourceColumn: case_type_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 34b55d47-87e5-4321-8228-725f3915d368
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCaseType = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_court_case_type = Source{[Schema="public",Item="court_case_type"]}[Data]
+				in
+				    public_court_case_type
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,104 @@
+table DimPerson
+	lineageTag: 1e4d1f2f-291a-4914-9825-832c56cc6697
+
+	column person_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bd86b216-3aed-4160-a654-d947c70d7c24
+		summarizeBy: none
+		sourceColumn: person_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		isHidden
+		lineageTag: 01b44c80-f674-4291-a763-863ea38b0ab0
+		summarizeBy: none
+		sourceColumn: first_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		isHidden
+		lineageTag: eb983237-09ba-4188-a5a2-3f0be58d1d0b
+		summarizeBy: none
+		sourceColumn: last_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_of_birth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3ff60ef8-470f-4a9d-9212-b25af7a194a6
+		summarizeBy: none
+		sourceColumn: date_of_birth
+
+		variation Variation
+			isDefault
+			relationship: 853fa76e-df78-443e-950b-e051b727044f
+			defaultHierarchy: LocalDateTable_d03d0de3-a34c-460d-992f-8a8f85a5bfd7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column gender
+		dataType: string
+		lineageTag: 1b324577-45d1-4a33-adf7-810818ddab7f
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column ssn_last4
+		dataType: string
+		lineageTag: 6ac7b286-cb1d-4c24-9333-e586889a8d68
+		summarizeBy: none
+		sourceColumn: ssn_last4
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0ed4cb58-1223-4f80-a6e8-f88dd01460c5
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 1039bd07-6ae0-4dae-b331-b2a28be4bd10
+			defaultHierarchy: LocalDateTable_493240bf-2b36-476e-9a0a-554892912b23.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Person Name' =
+			
+			DimPerson[first_name] & " " & DimPerson[last_name]
+		lineageTag: c3537cf2-88f9-4cf5-a9bb-94196dc5facd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimPerson = m
+		mode: import
+		source =
+				let
+				  Source = PostgreSQL.Database("localhost", "court_cms"),
+				  #"Navigation 1" = Source{[Schema = "public", Item = "people"]}[Data]
+				in
+				  #"Navigation 1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

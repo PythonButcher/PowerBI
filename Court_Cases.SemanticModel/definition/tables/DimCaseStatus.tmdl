@@ -1,0 +1,36 @@
+table DimCaseStatus
+	lineageTag: f133b159-981b-4516-91e8-615bab500f33
+
+	column case_status_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2b7b5706-a7c1-424d-b6ed-ee943bd82e81
+		summarizeBy: none
+		sourceColumn: case_status_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_name
+		dataType: string
+		lineageTag: 6afd0325-3560-43b7-a4d9-4642b64522f3
+		summarizeBy: none
+		sourceColumn: status_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCaseStatus = m
+		mode: import
+		source =
+				let
+				  Source = PostgreSQL.Database("localhost", "court_cms"),
+				  #"Navigation 1" = Source{[Schema = "public", Item = "case_status"]}[Data]
+				in
+				  #"Navigation 1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

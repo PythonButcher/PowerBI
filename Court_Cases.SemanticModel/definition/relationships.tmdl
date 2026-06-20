@@ -1,0 +1,135 @@
+relationship 853fa76e-df78-443e-950b-e051b727044f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimPerson.date_of_birth
+	toColumn: LocalDateTable_d03d0de3-a34c-460d-992f-8a8f85a5bfd7.Date
+
+relationship 1039bd07-6ae0-4dae-b331-b2a28be4bd10
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimPerson.created_at
+	toColumn: LocalDateTable_493240bf-2b36-476e-9a0a-554892912b23.Date
+
+relationship e94c9a7f-62c5-4d4b-9066-45edcf387475
+	fromColumn: BridgeCaseParty.case_id
+	toColumn: FactCases.case_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6daac835-5ed6-435c-8def-b4f17e3f948d
+	fromColumn: BridgeCaseParty.person_id
+	toColumn: DimPerson.person_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5bad70e0-1fc1-47fa-b651-4cff035bb1f2
+	fromColumn: FactCases.case_status_id
+	toColumn: DimCaseStatus.case_status_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4cb550f8-c110-4baf-bedc-818f012e0dac
+	fromColumn: FactCases.court_id
+	toColumn: DimCourts.court_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5a20454b-6ab1-4ec6-bcb8-3132faa2fc4b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimJudge.appointment_date
+	toColumn: LocalDateTable_c936a56a-3db5-4a8b-9e35-64abfd056f58.Date
+
+relationship 9a0cd044-fb6d-4fe2-83b2-1efdd1e4adf6
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactDispositions.charge_id
+	toColumn: FactCharges.charge_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 01243e07-6249-46a3-91a8-f1a3d24db0e9
+	fromColumn: FactPleas.plea_type_id
+	toColumn: DimPleaType.plea_type_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 246f4a86-9d51-458c-91dd-1c97e749bf99
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactPleas.charge_id
+	toColumn: FactCharges.charge_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship 47bceb25-d7ba-4a2b-ae52-1d30f63c316d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactSentences.disposition_id
+	toColumn: FactDispositions.disposition_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship f42072f1-93ca-43b6-bf46-81b11b0575b2
+	fromColumn: FactCharges.offense_id
+	toColumn: DimOffense.offense_id
+
+	annotation PBI_IsFromSource = FS
+
+relationship c8ed3d6d-579a-133d-f1d9-122f2956048c
+	fromColumn: FactCases.case_type_id
+	toColumn: DimCaseType.case_type_id
+
+relationship 2c418301-68b2-c8e3-37b2-d924017d6018
+	fromColumn: FactCases.assigned_judge_id
+	toColumn: DimJudge.judge_id
+
+relationship f6aceafb-5cbf-d01f-350b-1f61a719a799
+	crossFilteringBehavior: bothDirections
+	fromColumn: FactCases.case_id
+	toColumn: FactWarrants.case_id
+
+relationship 3e471eef-98c7-75aa-c1e8-7de12f5626a5
+	crossFilteringBehavior: bothDirections
+	fromColumn: FactCases.case_id
+	toColumn: FactPayments.case_id
+
+relationship 677e50ab-25a1-b7f4-dd90-104929ea2151
+	fromColumn: FactHearings.case_id
+	toColumn: FactCases.case_id
+
+relationship 161d37d6-20b2-6e24-30e4-d1c2579c7c2c
+	fromColumn: FactCases.filing_date
+	toColumn: DimDate.Date
+
+relationship e3765ad3-8240-85fc-4430-2d434c60018d
+	isActive: false
+	fromColumn: FactHearings.hearing_date
+	toColumn: DimDate.Date
+
+relationship bed41836-cfe3-200f-2461-19319d74a48b
+	isActive: false
+	fromColumn: FactPayments.payment_date
+	toColumn: DimDate.Date
+
+relationship e863ac8a-c22f-2bdb-a6d5-9f833627b358
+	isActive: false
+	fromColumn: FactWarrants.issue_date
+	toColumn: DimDate.Date
+
+relationship 83be8a7b-ca16-63f1-557f-131cb1044061
+	isActive: false
+	fromColumn: FactPleas.plea_date
+	toColumn: DimDate.Date
+
+relationship 0f86c8db-1b19-91f1-e166-6baf3be23793
+	isActive: false
+	fromColumn: FactDispositions.disposition_date
+	toColumn: DimDate.Date
+
+relationship 4df5182b-4667-9ae0-47fd-1fe3f19be14f
+	isActive: false
+	fromColumn: FactCharges.filed_date
+	toColumn: DimDate.Date
+
+relationship 64d8c2e4-93ad-a907-fb12-748cb8f415dc
+	fromColumn: FactCharges.case_id
+	toColumn: FactCases.case_id
+

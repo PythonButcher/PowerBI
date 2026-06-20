@@ -1,0 +1,208 @@
+table _Measures
+	lineageTag: 60533dc1-9f23-43a9-9bfc-9a4b240d9c0c
+
+	measure 'Case Count' =
+			
+			DISTINCTCOUNT ( FactCases[case_id] )
+		formatString: 0
+		lineageTag: a163fde0-7d7f-4ea5-beca-33b6cdc05a1d
+
+	measure 'Charge Count' =
+			
+			DISTINCTCOUNT ( FactCharges[charge_id] )
+		formatString: 0
+		lineageTag: d5a06ed4-e11d-4ff5-93e9-541698369f28
+
+	measure 'Hearing Count' =
+			
+			DISTINCTCOUNT ( FactHearings[hearing_id] )
+		formatString: 0
+		lineageTag: 354bb144-b029-492e-b090-8bae055115d7
+
+	measure 'Payment Count' =
+			
+			DISTINCTCOUNT ( FactPayments[payment_id] )
+		formatString: 0
+		lineageTag: 236e7736-9401-4a10-84de-0ac91a529568
+
+	measure 'Total Payment Amount' =
+			
+			SUM ( FactPayments[amount] )
+		lineageTag: 1cd3aabe-07c2-4bb4-8675-31747d6f7bdd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Warrant Count' =
+			
+			DISTINCTCOUNT ( FactWarrants[warrant_id] )
+		formatString: 0
+		lineageTag: 01b4b523-fd93-41be-8921-cf4046d09a19
+
+	measure 'Active Warrant Count' =
+			
+			CALCULATE (
+			    [Warrant Count],
+			    FactWarrants[is_active] = TRUE ()
+			)
+		formatString: 0
+		lineageTag: 264b41b4-a479-4e45-ba53-0a80b4caf1fe
+
+	measure 'Sentence Count' =
+			
+			DISTINCTCOUNT ( FactSentences[sentence_id] )
+		formatString: 0
+		lineageTag: b1e54fb8-e63b-4137-83fc-2777230bccfd
+
+	measure 'Person Count' =
+			
+			DISTINCTCOUNT ( DimPerson[person_id] )
+		formatString: 0
+		lineageTag: ce8ef0b5-726c-4fc8-8c91-a103da673e96
+
+	measure 'Average Charges Per Case' =
+			
+			DIVIDE(
+			    [Charge Count],
+			    [Case Count]
+			)
+		lineageTag: 4e3f2090-5219-4ca0-84cf-012be72e7690
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Hearings Per Case' =
+			
+			DIVIDE(
+			    [Hearing Count],
+			    [Case Count]
+			)
+		lineageTag: 552fee5f-35ec-44b4-ab10-2fb9e9ec33b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Payment Per Case' =
+			
+			DIVIDE(
+			    [Total Payment Amount],
+			    [Case Count]
+			)
+		lineageTag: b8f17350-a740-4cbb-b38e-a0ddfdb91ec4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cases With Payments' =
+			
+			DISTINCTCOUNT(FactPayments[case_id])
+		formatString: 0
+		lineageTag: 982528fb-0574-464a-8114-85b4b775f414
+
+	measure 'Cases With Hearings' =
+			
+			DISTINCTCOUNT(FactHearings[case_id])
+		formatString: 0
+		lineageTag: e49577c9-6403-4a3d-8efe-221f44cbd571
+
+	measure 'Cases With Warrants' =
+			
+			DISTINCTCOUNT(FactWarrants[case_id])
+		formatString: 0
+		lineageTag: 50d3e673-ac58-4464-b9a2-491de38a86c2
+
+	measure 'Pct Cases With Payments' =
+			
+			DIVIDE(
+			    [Cases With Payments],
+			    [Case Count]
+			)
+		lineageTag: 2dc7ee12-896b-4e0f-9349-1e3d3c136435
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Charges Filed' =
+			
+			CALCULATE(
+			    [Charge Count],
+			    USERELATIONSHIP(DimDate[Date], FactCharges[filed_date])
+			)
+		formatString: 0
+		lineageTag: 490724e6-c24b-4a2e-afe6-4a9349f11d02
+
+	measure 'Hearings Scheduled' =
+			
+			CALCULATE(
+			    [Hearing Count],
+			    USERELATIONSHIP(DimDate[Date], FactHearings[hearing_date])
+			)
+		formatString: 0
+		lineageTag: 43357236-3109-4ce2-adef-9a782a62595c
+
+	measure 'Payments Made' =
+			
+			CALCULATE(
+			    [Payment Count],
+			    USERELATIONSHIP(DimDate[Date], FactPayments[payment_date])
+			)
+		formatString: 0
+		lineageTag: 43ff116f-f6be-419f-80fa-049a6d289fa1
+
+	measure 'Payment Amount by Payment Date' =
+			
+			CALCULATE(
+			    [Total Payment Amount],
+			    USERELATIONSHIP(DimDate[Date], FactPayments[payment_date])
+			)
+		lineageTag: 9d830582-bcbb-4a9c-9692-d260d521a774
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Warrants Issued' =
+			
+			CALCULATE(
+			    [Warrant Count],
+			    USERELATIONSHIP(DimDate[Date], FactWarrants[issue_date])
+			)
+		formatString: 0
+		lineageTag: 83148f9c-0772-4e0c-8236-436afa5dd879
+
+	measure 'Disposition Rate' =
+			
+			DIVIDE(
+			    [Disposition Count],
+			    [Charge Count],
+			    0
+			)
+		formatString: 0%;-0%;0%
+		lineageTag: de712f72-bcd6-4eee-ac01-f4216401cf59
+
+	measure 'Disposition Count' =
+			
+			COUNTROWS(FactDispositions)
+		formatString: 0
+		lineageTag: 7491efc2-e744-4f81-a61f-714f4f1e70d2
+
+	measure 'Open Charges' =
+			
+			[Charge Count] - [Disposition Count]
+		formatString: 0
+		lineageTag: 65464bac-ba53-472b-81a9-45e5d03ced12
+
+	column Placeholder
+		lineageTag: 1f95799b-fa0b-4462-85de-b1d0dc488521
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Placeholder", STRING,
+				    {
+				        { "Placeholder" }
+				    }
+				)
+
+	annotation PBI_Id = d00afa240c8a414bba1bdf3cc8df5e2e
+

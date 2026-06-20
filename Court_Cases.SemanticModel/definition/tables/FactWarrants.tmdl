@@ -1,0 +1,68 @@
+table FactWarrants
+	lineageTag: 9c025e6f-776f-4d91-bbfd-244e229cfa3b
+
+	column warrant_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 29523ec7-b4e2-481d-92be-e3b56137c6e4
+		summarizeBy: none
+		sourceColumn: warrant_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3dc9e259-710a-4315-8b67-3bc08587a522
+		summarizeBy: none
+		sourceColumn: case_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column issue_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c759e299-6e95-4763-8c3b-b3203a080c1c
+		summarizeBy: none
+		sourceColumn: issue_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column warrant_type
+		dataType: string
+		lineageTag: f005f711-409d-4209-9cde-f7e3ed83eabd
+		summarizeBy: none
+		sourceColumn: warrant_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 60640efb-76db-484a-9495-330483808ee9
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactWarrants = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_warrants = Source{[Schema="public",Item="warrants"]}[Data]
+				in
+				    public_warrants
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

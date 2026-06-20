@@ -1,0 +1,80 @@
+table FactCharges
+	lineageTag: 8d24dc6d-13f6-44c2-acf9-ef9a66ef373f
+
+	column charge_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a720dc7b-9844-4469-bf05-16c95b65dfc9
+		summarizeBy: none
+		sourceColumn: charge_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column case_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7001226b-e58e-484d-82ad-2bda68c59907
+		summarizeBy: none
+		sourceColumn: case_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column offense_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 84348a28-a07e-4518-84dd-f07a4f562ae8
+		summarizeBy: none
+		sourceColumn: offense_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column charge_level
+		dataType: string
+		lineageTag: f601dfb3-3fdf-4456-93a6-16f3646342e8
+		summarizeBy: none
+		sourceColumn: charge_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column filed_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 66ae66f5-d117-41ee-bcf3-2a3ef243471e
+		summarizeBy: none
+		sourceColumn: filed_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column is_primary
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 133160be-58ee-4e4a-a580-3b4e95e4dca1
+		summarizeBy: none
+		sourceColumn: is_primary
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactCharges = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_charges = Source{[Schema="public",Item="charges"]}[Data]
+				in
+				    public_charges
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

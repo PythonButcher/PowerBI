@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Court_Cases"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c7502e34-3d0d-4395-8808-11ce70e7708a"
+  }
+}

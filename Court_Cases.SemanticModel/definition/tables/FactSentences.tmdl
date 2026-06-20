@@ -1,0 +1,77 @@
+table FactSentences
+	lineageTag: 9a0a8804-ad4a-4631-9d55-5c616cd4768d
+
+	column sentence_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6a7eeff7-f8e2-4ddb-b7fe-52ece9dad07a
+		summarizeBy: sum
+		sourceColumn: sentence_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column disposition_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 75dbf7f9-8c81-480f-8cf3-a2c4be891088
+		summarizeBy: none
+		sourceColumn: disposition_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column jail_days
+		dataType: int64
+		formatString: 0
+		lineageTag: dfd4b023-c1c2-4678-b228-49d27964c58d
+		summarizeBy: sum
+		sourceColumn: jail_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column probation_months
+		dataType: int64
+		formatString: 0
+		lineageTag: 8950cb2e-f39e-4833-b206-3627a024dc73
+		summarizeBy: sum
+		sourceColumn: probation_months
+
+		annotation SummarizationSetBy = Automatic
+
+	column fine_amount
+		dataType: double
+		lineageTag: 10ee8bc5-c068-4067-919b-b27b3c9d9f04
+		summarizeBy: sum
+		sourceColumn: fine_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column community_service_hours
+		dataType: int64
+		formatString: 0
+		lineageTag: a9ab07e3-53ac-4315-9b42-493dee473bc6
+		summarizeBy: sum
+		sourceColumn: community_service_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactSentences = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_sentences = Source{[Schema="public",Item="sentences"]}[Data]
+				in
+				    public_sentences
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

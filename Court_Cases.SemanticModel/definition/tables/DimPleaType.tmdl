@@ -1,0 +1,36 @@
+table DimPleaType
+	lineageTag: daef6484-7801-4820-81d2-bd9eaf368495
+
+	column plea_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 996193b5-c6e1-4467-a0ec-378a86c7e311
+		summarizeBy: none
+		sourceColumn: plea_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column plea_name
+		dataType: string
+		lineageTag: e3fea06d-d6fb-4051-8330-943845fc8d87
+		summarizeBy: none
+		sourceColumn: plea_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimPleaType = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_plea_type = Source{[Schema="public",Item="plea_type"]}[Data]
+				in
+				    public_plea_type
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

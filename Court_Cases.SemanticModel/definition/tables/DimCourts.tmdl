@@ -1,0 +1,52 @@
+table DimCourts
+	lineageTag: d16f06ca-00dc-44fd-bdf5-28f0d02c86a0
+
+	column court_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5acd49b5-270d-42fe-985f-52af8fe8b985
+		summarizeBy: none
+		sourceColumn: court_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_name
+		dataType: string
+		lineageTag: 6c508de6-5a99-410f-b46d-64653e475a6a
+		summarizeBy: none
+		sourceColumn: court_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column jurisdiction
+		dataType: string
+		lineageTag: 7c770a9b-41e4-4aa8-96a4-9cd42974988e
+		summarizeBy: none
+		sourceColumn: jurisdiction
+
+		annotation SummarizationSetBy = Automatic
+
+	column court_level
+		dataType: string
+		lineageTag: 9816a8b1-cd7c-4534-a2b9-3cb3173ca8d2
+		summarizeBy: none
+		sourceColumn: court_level
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCourts = m
+		mode: import
+		source =
+				let
+				  Source = PostgreSQL.Database("localhost", "court_cms"),
+				  #"Navigation 1" = Source{[Schema = "public", Item = "courts"]}[Data]
+				in
+				  #"Navigation 1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

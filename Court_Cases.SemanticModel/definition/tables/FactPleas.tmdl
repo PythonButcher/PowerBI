@@ -1,0 +1,63 @@
+table FactPleas
+	lineageTag: cfdd1c94-cac9-41f2-800d-bbaa20995599
+
+	column plea_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3a0fa18e-dd2c-4162-97a7-4f1570635fdf
+		summarizeBy: sum
+		sourceColumn: plea_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column charge_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 581e6a88-2792-4807-aea2-712b998f77e1
+		summarizeBy: none
+		sourceColumn: charge_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column plea_type_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e09aa427-bf90-416f-8431-f430ea201608
+		summarizeBy: none
+		sourceColumn: plea_type_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column plea_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d724eba9-9f75-455c-8df4-c1d198cb7ea4
+		summarizeBy: none
+		sourceColumn: plea_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition FactPleas = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_pleas = Source{[Schema="public",Item="pleas"]}[Data]
+				in
+				    public_pleas
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

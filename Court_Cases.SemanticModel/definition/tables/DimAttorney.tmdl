@@ -1,0 +1,82 @@
+table DimAttorney
+	lineageTag: 97ff76b2-b8da-4ac3-8d96-f084215c4aa4
+
+	column attorney_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4bb33987-6822-4953-837d-538270236480
+		summarizeBy: sum
+		sourceColumn: attorney_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		isHidden
+		lineageTag: 23d383c5-b59c-4432-848c-b90751d304b2
+		summarizeBy: none
+		sourceColumn: first_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		isHidden
+		lineageTag: 644336d0-d304-42f1-bdaa-76ae06eef21a
+		summarizeBy: none
+		sourceColumn: last_name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column bar_number
+		dataType: string
+		lineageTag: 2c842cd4-d916-4ed2-a75a-2156f49dbb02
+		summarizeBy: none
+		sourceColumn: bar_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column firm_name
+		dataType: string
+		lineageTag: e67c804d-308e-4139-b581-9849bf570319
+		summarizeBy: none
+		sourceColumn: firm_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column role
+		dataType: string
+		lineageTag: db54aabe-525a-4ef2-8179-fed2aece2e55
+		summarizeBy: none
+		sourceColumn: role
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Attorney Name' =
+			
+			DimAttorney[first_name] & " " & DimAttorney[last_name]
+		lineageTag: 8bb7e34a-87fe-4e67-801d-cadc4ea32143
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimAttorney = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "court_cms"),
+				    public_attorneys = Source{[Schema="public",Item="attorneys"]}[Data]
+				in
+				    public_attorneys
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
