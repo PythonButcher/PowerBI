@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "fed4cd52c6a701a0e748",
   "position": {
-    "x": 649,
-    "y": 392,
+    "x": 673.86861313868621,
+    "y": 380.7299270072993,
     "z": 8000,
-    "height": 304,
-    "width": 607,
+    "height": 312.99270072992704,
+    "width": 606.1313868613139,
     "tabOrder": 8000
   },
   "visual": {
@@ -167,7 +167,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "70D"
+                  "Value": "60.48174542104792D"
                 }
               }
             }
@@ -181,7 +181,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "72D"
+                  "Value": "56.96351450819354D"
                 }
               }
             }
@@ -189,89 +189,11 @@
           "selector": {
             "metadata": "_Measures.Charge Count"
           }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "86D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Measures.Disposition Rate"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "76D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Measures.Warrant Count"
-          }
-        },
-        {
-          "properties": {
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "112D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "metadata": "_Measures.Total Payment Amount"
-          }
         }
       ],
       "columnHeaders": [
         {
           "properties": {}
-        }
-      ]
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Operational Risk & Collections'"
-                }
-              }
-            },
-            "fontFamily": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Calibri'"
-                }
-              }
-            },
-            "alignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'left'"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "13D"
-                }
-              }
-            }
-          }
         }
       ]
     },

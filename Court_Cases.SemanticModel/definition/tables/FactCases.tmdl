@@ -106,31 +106,6 @@ table FactCases
 			)
 		lineageTag: c597e491-0c0a-441f-8b77-cbb76e3108d4
 		summarizeBy: none
-		sortByColumn: 'Pending Age Bucket Sort'
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Pending Age Bucket Sort' =
-			
-			VAR AgeDays =
-			    DATEDIFF(
-			        FactCases[filing_date],
-			        TODAY(),
-			        DAY
-			    )
-			RETURN
-			SWITCH(
-			    TRUE(),
-			    AgeDays <= 90, 1,
-			    AgeDays <= 180, 2,
-			    AgeDays <= 365, 3,
-			    4
-			)
-		dataType: int64
-		isHidden
-		formatString: 0
-		lineageTag: 0f44b9af-bd19-4f8c-9e65-69f086f6ce13
-		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
