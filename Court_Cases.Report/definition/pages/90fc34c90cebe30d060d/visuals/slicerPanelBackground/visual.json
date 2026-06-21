@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "slicerPanelBackground",
+  "position": {
+    "x": 1000,
+    "y": 16,
+    "z": 11000,
+    "height": 680,
+    "width": 256,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "shape",
+    "objects": {}
+  }
+}
