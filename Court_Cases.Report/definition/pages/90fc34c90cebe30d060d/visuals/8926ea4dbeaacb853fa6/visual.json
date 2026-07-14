@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "8926ea4dbeaacb853fa6",
+  "position": {
+    "x": 15.664335664335681,
+    "y": 347.97202797202794,
+    "z": 3000,
+    "height": 64.8951048951049,
+    "width": 211.46853146853147,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimJudge"
+                    }
+                  },
+                  "Property": "Judge Name"
+                }
+              },
+              "queryRef": "DimJudge.Judge Name",
+              "nativeQueryRef": "Judge Name",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "4647f1779a4a04e3e1dc"
+}

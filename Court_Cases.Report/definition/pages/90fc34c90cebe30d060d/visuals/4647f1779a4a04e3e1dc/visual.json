@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "4647f1779a4a04e3e1dc",
+  "position": {
+    "x": 1019.3006993006992,
+    "y": 35.8041958041958,
+    "z": 10000,
+    "height": 644.47552447552448,
+    "width": 260.69930069930081,
+    "tabOrder": 14002
+  },
+  "visualGroup": {
+    "displayName": "Slicer Panel",
+    "groupMode": "ScaleMode"
+  },
+  "isHidden": true
+}

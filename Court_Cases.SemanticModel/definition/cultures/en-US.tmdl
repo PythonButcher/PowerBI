@@ -14957,6 +14957,39 @@ cultureInfo en-US
 			    }
 			  },
 			  "Relationships": {
+			    "dim_person_created_at_date_hierarchy_has_dim_person_created_at_month": {
+			      "Binding": {
+			        "ConceptualEntity": "DimPerson"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_person.created_at.date_hierarchy": {
+			          "Target": {
+			            "Entity": "dim_person.created_at.date_hierarchy"
+			          }
+			        },
+			        "dim_person.created_at.month": {
+			          "Target": {
+			            "Entity": "dim_person.created_at.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_person.created_at.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "dim_person.created_at.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "created_at_date_hierarchy_have_created_at_month"
+			        }
+			      ]
+			    },
 			    "dim_person_created_at_date_hierarchy_has_dim_person_created_at_quarter": {
 			      "Binding": {
 			        "ConceptualEntity": "DimPerson"
@@ -19388,39 +19421,6 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "some_fact_warrants_are_active_fact_warrants"
-			        }
-			      ]
-			    },
-			    "dim_person_created_at_date_hierarchy_has_dim_person_created_at_month": {
-			      "Binding": {
-			        "ConceptualEntity": "DimPerson"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_person.created_at.date_hierarchy": {
-			          "Target": {
-			            "Entity": "dim_person.created_at.date_hierarchy"
-			          }
-			        },
-			        "dim_person.created_at.month": {
-			          "Target": {
-			            "Entity": "dim_person.created_at.month"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_person.created_at.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "dim_person.created_at.month"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "created_at_date_hierarchy_have_created_at_month"
 			        }
 			      ]
 			    },

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "9b7bd90f994d94877802",
+  "position": {
+    "x": 15.664335664335681,
+    "y": 204.75524475524475,
+    "z": 2000,
+    "height": 91.748251748251747,
+    "width": 211.46853146853147,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimCourts"
+                    }
+                  },
+                  "Property": "court_name"
+                }
+              },
+              "queryRef": "DimCourts.court_name",
+              "nativeQueryRef": "Court",
+              "active": true,
+              "displayName": "Court"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "4647f1779a4a04e3e1dc"
+}

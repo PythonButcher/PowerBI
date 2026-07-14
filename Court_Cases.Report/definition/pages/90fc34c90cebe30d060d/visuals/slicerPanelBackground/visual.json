@@ -2,15 +2,38 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "slicerPanelBackground",
   "position": {
-    "x": 1000,
-    "y": 16,
-    "z": 11000,
-    "height": 680,
-    "width": 256,
-    "tabOrder": 11000
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 644.47552447552448,
+    "width": 260.69930069930069,
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "shape",
-    "objects": {}
-  }
+    "objects": {
+      "fill": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    }
+  },
+  "parentGroupName": "4647f1779a4a04e3e1dc"
 }
